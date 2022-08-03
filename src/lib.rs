@@ -1,7 +1,7 @@
 #![deny(missing_docs)]
 
 //! # Edit Distance
-//! Find the Levenshtein edit distance between `s` and `t`.
+//! A library for fast finding the Levenshtein edit distance between `s` and `t`.
 
 use std::cmp::{max, min};
 
