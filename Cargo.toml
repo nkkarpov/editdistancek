@@ -7,7 +7,7 @@ repository = "https://github.com/nkkarpov/editdistancek"
 documentation = "https://github.com/nkkarpov/editdistancek"
 rust-version = "1.62"
 readme = "README.md"
-license-file = "LICENSE.txt"
+license-file = "LICENSE"
 keywords = ["text-processing", "search", "spelling", "distance", "edit", "ukkonen"]
 edition = "2021"
 
