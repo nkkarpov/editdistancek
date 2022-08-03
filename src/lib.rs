@@ -1,6 +1,5 @@
 #![deny(missing_docs)]
 
-
 //! # Edit Distance
 //! Find the Levenshtein edit distance between `s` and `t`.
 
@@ -66,7 +65,6 @@ pub fn mismatch(s: &[u8], t: &[u8]) -> usize {
     }
 }
 
-
 /// Returns the length of longest common prefix `s` and `t` (with SIMD optimizations).
 #[inline(always)]
 #[allow(dead_code)]
@@ -77,10 +75,10 @@ pub fn mismatch_fast(s: &[u8], t: &[u8]) -> usize {
     let mut off = 0;
 
     unsafe {
-        #[cfg(target_arch = "x86_64")]
-        use std::arch::x86_64::*;
         #[cfg(target_arch = "x86")]
         use std::arch::x86::*;
+        #[cfg(target_arch = "x86_64")]
+        use std::arch::x86_64::*;
 
         while xs.len() >= 16 {
             let x = _mm_loadu_si128(xs.as_ptr() as _);
@@ -98,8 +96,6 @@ pub fn mismatch_fast(s: &[u8], t: &[u8]) -> usize {
     off + mismatch_naive(xs, ys)
 }
 
-
 fn mismatch_naive(s: &[u8], t: &[u8]) -> usize {
     s.iter().zip(t).take_while(|(x, y)| x == y).count()
 }
-
