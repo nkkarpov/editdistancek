@@ -1,9 +1,17 @@
+#![deny(missing_docs)]
+
+
+//! # Edit Distance
+//! Find the Levenshtein edit distance between `s` and `t`.
+
 use std::cmp::{max, min};
 
-pub fn edit_distance(s: &[u8], t: &[u8], k: usize) -> usize {
+/// Returns edit distance between `s` and `t`.
+pub fn edit_distance(s: &[u8], t: &[u8]) -> usize {
     return edit_distance_k(s, t, max(s.len(), t.len())).unwrap();
 }
 
+/// If edit distance `d` between `s` and `t` is at most k, then returns Some(d) otherwise returns None.
 pub fn edit_distance_k(s: &[u8], t: &[u8], k: usize) -> Option<usize> {
     let (s, t, s_length, t_length) = if s.len() > t.len() {
         (t, s, t.len(), s.len())
@@ -45,16 +53,23 @@ pub fn edit_distance_k(s: &[u8], t: &[u8], k: usize) -> Option<usize> {
     }
 }
 
+/// Returns the length of longest common prefix `s` and `t` (uses SIMD if it is possible).
 #[inline(always)]
 pub fn mismatch(s: &[u8], t: &[u8]) -> usize {
     #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     {
         return mismatch_fast(s, t);
     }
-    s.iter().zip(t).take_while(|(x, y)| x == y).count()
+    #[allow(unreachable_code)]
+    {
+        mismatch_naive(s, t)
+    }
 }
 
+
+/// Returns the length of longest common prefix `s` and `t` (with SIMD optimizations).
 #[inline(always)]
+#[allow(dead_code)]
 pub fn mismatch_fast(s: &[u8], t: &[u8]) -> usize {
     let l = s.len().min(t.len());
     let mut xs = &s[..l];
@@ -80,7 +95,11 @@ pub fn mismatch_fast(s: &[u8], t: &[u8]) -> usize {
             off += 16;
         }
     }
-    off + mismatch(xs, ys)
+    off + mismatch_naive(xs, ys)
 }
 
+
+fn mismatch_naive(s: &[u8], t: &[u8]) -> usize {
+    s.iter().zip(t).take_while(|(x, y)| x == y).count()
+}
 
