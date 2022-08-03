@@ -10,7 +10,7 @@ pub fn edit_distance(s: &[u8], t: &[u8]) -> usize {
     return edit_distance_k(s, t, max(s.len(), t.len())).unwrap();
 }
 
-/// If edit distance `d` between `s` and `t` is at most k, then returns Some(d) otherwise returns None.
+/// If edit distance `d` between `s` and `t` is at most `k`, then returns `Some(d)` otherwise returns `None`.
 pub fn edit_distance_k(s: &[u8], t: &[u8], k: usize) -> Option<usize> {
     let (s, t, s_length, t_length) = if s.len() > t.len() {
         (t, s, t.len(), s.len())
