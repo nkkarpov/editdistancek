@@ -1,18 +1,21 @@
 # editdistancek
 
-Calculate [edit distance](https://en.wikipedia.org/wiki/Levenshtein_distance) (or Levenshtein edit distance) between two
-strings.
+This library calculates the Levenshtein edit distance between two strings. The edit distance represents the minimum
+number of edits required to transform one string into the other.
 
-The library is inspired by algorithms of [Ukkonen](https://www.cs.helsinki.fi/u/ukkonen/InfCont85.PDF)
-and [Landau, Myers, and Schmidt](https://epubs.siam.org/doi/pdf/10.1137/S0097539794264810).
-The running time of algorithm is $O(d*min(n,m))$ (where $d$ is the edit distance between strings and $n$ and $m$ are
-lengths of strings).
+Our method is inspired by the algorithms of Ukkonen and Landau, Myers, and Schmidt. These strategies offer efficient
+ways of calculating the edit distance.
+
+The algorithm operates with a running time of O(d*min(n,m)). Here, 'd' stands for the edit distance between the two
+strings, while 'n' and 'm' denote the lengths of these strings, respectively. This efficient running time ensures the
+algorithm remains performant even for larger strings.
 
 ## Motivation
 
-The initial goal of this library is to create a fast implementation for the bounded version of the edit distance problem (
-given a threshold, $k$ return the edit distance $d$ if it is at most $k$ or return that it is more than $k$).
-Typically, the classic edit distance algorithm is slow in such cases.
+The primary objective of this library is to devise a quick solution for the bounded version of the edit distance
+problem. Specifically, it aims to handle scenarios where, given a threshold 'k', it returns the edit distance 'd' if 'd'
+is less than or equal to 'k'. Otherwise, it indicates that the distance exceeds 'k'. This approach addresses the typical
+shortcoming of the classic edit distance algorithm, which tends to be inefficient in these cases.
 
 ## Installation
 
@@ -20,15 +23,15 @@ Add to Cargo.toml
 
 ```toml
 [dependecies]
-editdistancek = "0.1.0"
+editdistancek = "1.*"
 ```
 
 ## Usage
 
 ```rust
 edit_distance("kitten".as_bytes(), "sitting".as_bytes()); // => 3
-edit_distance_k("kitten".as_bytes(), "sitting".as_bytes(), 3); // => Some(3)
-edit_distance_k("kitten".as_bytes(), "sitting".as_bytes(), 2); // => None
+edit_distance_bounded("kitten".as_bytes(), "sitting".as_bytes(), 3); // => Some(3)
+edit_distance_bounded("kitten".as_bytes(), "sitting".as_bytes(), 2); // => None
 ```
 
 ## License
