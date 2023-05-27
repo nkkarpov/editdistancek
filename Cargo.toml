@@ -1,6 +1,6 @@
 [package]
 name = "editdistancek"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Nikolai Karpov <kimaska@gmail.com>"]
 description = "Fast algorithm for computing edit distance"
 repository = "https://github.com/nkkarpov/editdistancek"
@@ -9,7 +9,7 @@ rust-version = "1.62"
 readme = "README.md"
 license = "MIT"
 keywords = ["text", "distance", "edit"]
-edition = "2021"
+edition = "2018"
 
 
 [dev-dependencies]
