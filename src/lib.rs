@@ -67,6 +67,7 @@ pub fn mismatch(s: &[u8], t: &[u8]) -> usize {
 }
 
 /// Returns the length of longest common prefix `s` and `t` (with SIMD optimizations).
+#[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 #[inline(always)]
 #[allow(dead_code)]
 fn mismatch_simd(s: &[u8], t: &[u8]) -> usize {
